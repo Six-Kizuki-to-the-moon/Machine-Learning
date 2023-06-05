@@ -1,12 +1,29 @@
 # Machine Learning Deployment
 Built using FLASK
 
+## Installation (run local)
+Packages
+```
+pip install Flask 
+pip install numpy
+pip install pandas
+pip install tensorflow
+pip install scikit-learn
+```
+Note<br>
+<ul>
+  <li>Make sure you already installed <a href="[https://translate.google.com/?sl=en&tl=id&text=packages&op=translate](https://www.anaconda.com/download-success)">anaconda</a></li>
+  <li>Make sure you already installed <a href="https://www.apachefriends.org/">xampp</a></li>
+  <li>Download database on folder `/app/dataset/` and import on your xampp</li>
+</ul>
+
+
 ## Endpoint
 
 ### **Home**
 #### GET
 
-```http
+```
   GET /
 ```
 
@@ -17,7 +34,7 @@ Built using FLASK
 ### **Content Based Filtering**
 #### POST
 
-```http
+```
   POST /recommendContent
 ```
 
@@ -33,7 +50,7 @@ Built using FLASK
 ### **Collaborative Filtering**
 #### POST
 
-```http
+```
   POST /recommendCollab
 ```
 
