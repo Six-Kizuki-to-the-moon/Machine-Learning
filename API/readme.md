@@ -1,5 +1,5 @@
 # Machine Learning Deployment
-Buil using FLASK
+Built using FLASK
 
 ## Endpoint
 
@@ -23,12 +23,12 @@ Buil using FLASK
 
 | Payloads     | Type     | Info    |
 | :----------- | :------- | :------- | 
-| `category`       | `string` | 
-| `city`   | `string` | 
-| `price`   | `int` | 
-| `rating`   | `float` | 
-| `lat`   | `float` | 
-| `long`   | `float` | 
+| `category`       | `string` | Required |
+| `city`   | `string` | Required |
+| `price`   | `int` | Required |
+| `rating`   | `float` | Required |
+| `lat`   | `float` | Required |
+| `long`   | `float` | Required |
 
 ### **Collaborative Filtering**
 #### POST
