@@ -68,19 +68,6 @@ def home():
     response.status_code = 200
     return response
 
-    data = {
-        'status': 'fail', 
-        'message': 'Unsupported request method',
-        'error': True
-    }
-    
-    response = make_response(jsonify(data))
-    response.headers['Content-Type'] = 'application/json'
-    response.headers['Custom-Header'] = 'Custom Value'
-    response.status_code = 404
-    
-    return response
-
 # Endpoint untuk route "/recommendCollab"
 # menerima data menggunakan x-www-form-urlencoded
 @app.route("/recommendCollab", methods=["POST"])
