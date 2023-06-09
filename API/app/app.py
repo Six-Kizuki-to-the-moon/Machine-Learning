@@ -74,8 +74,8 @@ def home():
 def recommendCollab():
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request
-        user_id =  request.form.get("user_id", None)
-        city_user =  request.form.get("city_user", None)
+        user_id =  int(request.form.get("user_id"))
+        city_user =  str(request.form.get("city_user"))
     
         # memanggil fungsi dari model yang sudah dibuat
         recommendations = recomendation(destination, ratings, user_id, city_user)
@@ -102,10 +102,10 @@ def recommendCollab():
 def recommendContent():
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request  
-        category = request.form.get['category']
-        city = request.form.get['city']
-        price = request.form.get['price']
-        rating = request.form.get['rating']
+        category = str(request.form.get('category'))
+        city = str(request.form.get('city'))
+        price = int(request.form.get('price'))
+        rating = float(request.form.get('rating'))
     
         # memanggil fungsi dari model yang sudah dibuat
         recommendations = recommend_places(destination, category, city, price, rating)
@@ -115,7 +115,7 @@ def recommendContent():
             'status': 'success',
         } 
     
-        response = make_response(jsonify(data))
+        response = jsonify(data)
     
         # Mengembalikan hasil rekomendasi sebagai respons JSON
         return response
@@ -132,7 +132,7 @@ def recommendContent():
 def recommendSimilarItem():
     # Mendapatkan data input dari body request
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
-        destination_name = request.form.get('destination_name') 
+        destination_name = str(request.form.get('destination_name'))
      
         # memanggil fungsi dari model yang sudah dibuat
         recommendations = rec_similarItem(ratings, destination, users, destination_name)
