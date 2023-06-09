@@ -9,8 +9,6 @@ def rec_similarItem(ratings, destinations, users, destination_name, n_item = 5):
 
     # merge full dataset (destination & rating) with user dataset (age's column)
     merged_df = pd.merge(full, users, on='User_Id')
-    
-    preapare = merged_df
 
     # sort merged_df by Place_Id
     merged_df = merged_df.sort_values('Place_Id')
