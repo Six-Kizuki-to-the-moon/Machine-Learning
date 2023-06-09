@@ -14,18 +14,18 @@ conn = mysql.connector.connect(
     host='localhost',
     user='root',
     password='',
-    database='absensi' 
+    database='tourista_db' 
 )
 
 # Mengeksekusi query untuk mengambil data dari tabel
 
-query = "SELECT * FROM tourism"
+query = "SELECT * FROM destination"
 destination = pd.read_sql_query(query, conn)
 
-query = "SELECT * FROM ratings"
+query = "SELECT * FROM review_wisata"
 ratings = pd.read_sql_query(query, conn)
 
-query = "SELECT * FROM users"
+query = "SELECT * FROM user_profile"
 users = pd.read_sql_query(query, conn)
 
 app = Flask(__name__)
@@ -102,6 +102,7 @@ def recommendCollab():
 def recommendContent():
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request  
+        user_id = request.form.get('user_id')
         category = str(request.form.get('category'))
         city = str(request.form.get('city'))
         price = int(request.form.get('price'))
@@ -110,8 +111,20 @@ def recommendContent():
         # memanggil fungsi dari model yang sudah dibuat
         recommendations = recommend_places(destination, category, city, price, rating)
     
+        cursor = conn.cursor()
+        
+        # syntax sql 
+        sql = "INSERT INTO trip_detail (user_id , trip_name_type, name_wisata) VALUES (%s, %s, %s)"
+        for category, places in recommendations.items():
+            for place in places:
+                values = (user_id, category, place)
+                cursor.execute(sql, values)
+                
+        conn.commit()
+        
+        cursor.close()
+        
         data = {
-            'recommendations': recommendations,
             'status': 'success',
         } 
     
