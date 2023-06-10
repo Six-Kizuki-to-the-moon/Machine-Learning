@@ -44,7 +44,7 @@ def recomendation(destination, ratings, user_id, user_lat, user_long, np_val = 5
     history = model.fit(x= [train.wisata_id, train.user_wisata], 
                     y= train.wisata_rating, 
                     validation_data = ([train.wisata_id, train.user_wisata], train.wisata_rating), 
-                    epochs =25,
+                    epochs =18,
                     callbacks=[early_stopping],
                     verbose=0)
     
