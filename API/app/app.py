@@ -53,10 +53,11 @@ def recommendCollab():
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request
         user_id =  request.form.get("user_id")
-        city_user =  str(request.form.get("city_user"))
+        user_lat = float(request.form.get("user_lat")),
+        user_long =  float(request.form.get("user_long"))
     
         # memanggil fungsi dari model yang sudah dibuat
-        recommendations = recomendation(destination, ratings, user_id, city_user)
+        recommendations = recomendation(destination, ratings, user_id, user_lat, user_long)
     
         data = {
             'recommendations': recommendations,
@@ -169,5 +170,5 @@ def methd_not_found(error):
     
     return response
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
