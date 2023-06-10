@@ -30,28 +30,6 @@ users = pd.read_sql_query(query, conn)
 
 app = Flask(__name__)
 
-# rout untuk menerima data menggunakan x-www-form-urlencoded
-@app.route('/process', methods=['POST'])
-def process():
-    if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
-        # Mendapatkan nilai dari body permintaan
-        user_id = request.form.get('user_id')
-        # Melakukan pemrosesan data
-        processed_data = user_id.upper()
-        # Membuat respons JSON
-        response = {
-            'status': 'success',
-            'message': 'Data berhasil diproses',
-            'processed_data': processed_data
-        }
-        return jsonify(response)
-    else:
-        response = {
-            'status': 'fail',
-            'message': 'Content-Type harus application/x-www-form-urlencoded'
-        }
-        return jsonify(response), 400
-
 # Endpoint untuk route "/"
 # menerima data menggunakan x-www-form-urlencoded
 @app.route("/", methods=["GET"])
@@ -74,7 +52,7 @@ def home():
 def recommendCollab():
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request
-        user_id =  int(request.form.get("user_id"))
+        user_id =  request.form.get("user_id")
         city_user =  str(request.form.get("city_user"))
     
         # memanggil fungsi dari model yang sudah dibuat
