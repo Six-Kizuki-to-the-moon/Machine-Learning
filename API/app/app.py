@@ -127,12 +127,12 @@ def recommendSimilarItem():
         destination_name = str(request.form.get('destination_name'))
      
         # memanggil fungsi dari model yang sudah dibuat
-        recommendations = rec_similarItem(ratings, destination, users, destination_name)
+        recommendations = rec_similarItem(destination, users, destination_name)
     
         data = {
         'recommendations': recommendations,
         'status': 'success',
-    } 
+        } 
     
         response = make_response(jsonify(data))
     
