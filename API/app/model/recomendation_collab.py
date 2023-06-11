@@ -25,6 +25,7 @@ def recomendation(destination, ratings, user_id, user_lat, user_long, np_val = 5
                     y= train.wisata_rating, 
                     validation_data = ([train.wisata_id, train.user_wisata], train.wisata_rating), 
                     epochs =5,
+                    verbose = False,
                     callbacks=[early_stopping])
     
     def haversine_distance(lat1, long1, lat2, long2):
