@@ -7,6 +7,8 @@ from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split 
 from tensorflow.keras.models import Model 
 
+import os
+
 # calculations for "haversine distance" and complementary functions for collaborative filtering
 from math import radians
 
@@ -15,8 +17,8 @@ def recomendation(destination, ratings, user_id, user_lat, user_long, np_val = 5
     
     train, test = train_test_split(ratings, test_size = 0.2)
     
-    # load model pre trained
-    model =  tf.keras.models.load_model('API\ml-dev\pretrained_collab_rec')
+    # Load pre-trained model
+    model = tf.keras.models.load_model('API\ml-dev\pretrained_collab_rec')
     
     early_stopping = EarlyStopping(patience=5, restore_best_weights=True)
     model.compile(optimizer=Adam(learning_rate = 0.0005), loss='mean_squared_error') 
@@ -70,7 +72,7 @@ def recomendation(destination, ratings, user_id, user_lat, user_long, np_val = 5
             destination = filter_by_location(destination, u_lat, u_long, 30)[:20]
             destination = destination.sort_values('rating', ascending = False)  
             
-        return destination[['name_wisata', 'city','coordinate', 'destination_photo','description_wisata']][:np_val].to_dict(orient='records')
+        return destination[:np_val].to_dict(orient='records')
     
     
     recommendations = collaborative_rec(int(user_id), destination, model, user_lat, user_long, np_val)
