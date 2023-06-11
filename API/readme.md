@@ -1,7 +1,7 @@
 # Machine Learning Deployment
-Built using FLASK
+This API has been creating using FLASK
 
-## Installation (run local)
+## Packages
 Packages
 ```
 pip install Flask 
@@ -9,6 +9,7 @@ pip install numpy
 pip install pandas
 pip install tensorflow
 pip install scikit-learn
+pip install mysql-connector-python
 ```
 Note<br>
 <ul>
@@ -18,9 +19,9 @@ Note<br>
 </ul>
 
 
-## Endpoint
+# Endpoint
 
-### **Home**
+## **Home**
 #### GET
 
 ```
@@ -29,32 +30,45 @@ Note<br>
 
 | Arguments | Output              |
 | :-------- | :------------------ |
-| none     | API is running  |
+| none     | API tourista already running, for documentation can direct on github  |
 
-### **Content Based Filtering**
-#### POST
+## **Content Based Filtering**
+### POST
+All of the body for given data only using x-www-form-urlencoded format
 
 ```
-  POST /recommendContent
+  POST /recommendContentBased
 ```
 
-| Payloads     | Type     | Info    |
-| :----------- | :------- | :------- | 
-| `category`       | `string` | Required |
-| `city`   | `string` | Required |
-| `price`   | `int` | Required |
-| `rating`   | `float` | Required |
-| `lat`   | `float` | Required |
-| `long`   | `float` | Required |
+| Key          | Info     |
+| :----------- | :------- | 
+| `user_id`    | Required |
+| `category`   | Required |
+| `city`       | Required |
+| `price`      | Required |
 
-### **Collaborative Filtering**
-#### POST
+## **Collaborative Filtering**
+### POST
+All of the body for given data only using x-www-form-urlencoded format
 
 ```
   POST /recommendCollab
 ```
 
-| Payloads     | Type     | Info    |
-| :----------- | :------- | :------- | 
-| ` user_id`       | `string` | Optional |
-| `detail_user`   | `string` | Optional |
+| Key          | Info     |
+| :----------- | :------- | 
+| `user_id`    | Required |
+| `user_lat`   | Required |
+| `user_long`  | Required |
+
+## **Similarity Item**
+### POST
+All of the body for given data only using x-www-form-urlencoded format
+
+```
+  POST /recommendSimilarItem
+```
+
+| Key                | Info     |
+| :----------------- | :------- | 
+| `destination_name' | Required |
