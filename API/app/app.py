@@ -85,10 +85,9 @@ def recommendContent():
         category = str(request.form.get('category'))
         city = str(request.form.get('city'))
         price = int(request.form.get('price'))
-        rating = float(request.form.get('rating'))
     
         # memanggil fungsi dari model yang sudah dibuat
-        recommendations = recommend_places(destination, category, city, price, rating)
+        recommendations = recommend_places(destination, category, city, price, 4)
     
         cursor = conn.cursor()
         
