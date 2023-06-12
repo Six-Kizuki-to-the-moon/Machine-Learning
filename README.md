@@ -18,7 +18,7 @@ This repository is used to create travel recommendation systems based on user pr
 - API folder contains model Machine Learning & FLASK
     - For model machine learing on this folder we used mysql to read the dataset
 - dataset folder contains cleaned data for synchronizing the database from <a href="https://github.com/Six-Kizuki-to-the-moon/tourista-api">Cloud Computing</a>
-- model folder contain model machine learing for recomendation system
+- model folder contain model machine learning for recomendation system
 - file data_cleaning_visualization.ipynb for see the visualization from the dataset
 
 # Model explanation
