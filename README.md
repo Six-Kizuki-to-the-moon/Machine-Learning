@@ -2,7 +2,7 @@
 This repository is used to create travel recommendation systems based on user preferences
 
 # Resource
-- Dataset : Before we cleaning the dataset we used from <a href="https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination">Indonesia Tourism Destination</a>. And after we clean the dataset we store it in the folder dataset in this repository
+- Dataset : The first step we do is clean the dataset we got from <a href="https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination">Indonesia Tourism Destination</a> that we will use and then we save it in the dataset folder in this repository. 
 - Model : We creating the three models with using <a href="https://www.tensorflow.org/">Tensorflow</a>, <a href="https://scikit-learn.org/">Sklearn</a> technology.
     - Content Based Filtering, for giving best preference based on user input such as category, city, and price. {<a href="https://github.com/Six-Kizuki-to-the-moon/Machine-Learning/blob/main/model/recomendation_category.ipynb">model1</a>, <a href="https://github.com/Six-Kizuki-to-the-moon/Machine-Learning/blob/main/model/recomendation_similarItem.ipynb">model2</a>}
     - Collaborative filtering, for giving recomendations based on ratings user on every destination {<a href="https://github.com/Six-Kizuki-to-the-moon/Machine-Learning/blob/main/model/recomendation_collab.ipynb">model3</a>}
@@ -19,11 +19,11 @@ This repository is used to create travel recommendation systems based on user pr
     - For model machine learing on this folder we used mysql to read the dataset
 - dataset folder contains cleaned data for synchronizing the database from <a href="https://github.com/Six-Kizuki-to-the-moon/tourista-api">Cloud Computing</a>
 - model folder contain model machine learning for recomendation system
-- file data_cleaning_visualization.ipynb for see the visualization from the dataset
+- file data_cleaning_visualization.ipynb for see the visualization results to get better understanding of the data that we used.
 
 # Model explanation
 ## Recomendation Collab 
-This <a href="https://github.com/Six-Kizuki-to-the-moon/Machine-Learning/blob/main/model/recomendation_collab.ipynb">model</a> focusing for **predict rating** for user based on their rating to another destination and give the nearest tourist destination.
+This <a href="https://github.com/Six-Kizuki-to-the-moon/Machine-Learning/blob/main/model/recomendation_collab.ipynb">model</a> focuses on **rating predictions** for users based on their ratings of other destinations and provides the closest tourist destinations by implementing the "haversine distance" method.
 - On the training process, we got the best graph with loss: 0.5242 - val_loss: 0.0807
     
     ![TrainValGraph!](/resource/TrainValGraph.png "TrainValGraph")
