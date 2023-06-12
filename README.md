@@ -20,3 +20,38 @@ This repository is used to create travel recommendation systems based on user pr
 - dataset folder contains cleaned data for synchronizing the database from <a href="https://github.com/Six-Kizuki-to-the-moon/tourista-api">Cloud Computing</a>
 - model folder contain model machine learing for recomendation system
 - file data_cleaning_visualization.ipynb for see the visualization from the dataset
+
+# Model explanation
+## Recomendation Collab 
+This model focusing for **predict rating** for user based on their rating to another destination and give the nearest tourist destination.
+- On the training process, we got the best graph with loss: 0.5242 - val_loss: 0.0807
+    
+    ![TrainValGraph!](/resource/TrainValGraph.png "TrainValGraph")
+
+- Because we will train again this model on flask API with fewer epochs so we create **pre-trained model** 
+for making faster computation & optimal result
+
+    | Type                       | Ephocs  | time       | result                         |
+    |----------------------------|---------|------------|--------------------------------|
+    | Without pre-trained        | 200     | 2m,7.5s    |loss: 0.5242 - val_loss: 0.0807 |
+    | With pre-trained           | 10      | 3.4s       |loss: 0.9272 - val_loss: 0.4587 |
+
+- This model will be implemented on "Destination near you" section
+
+    ![Implementation!](/resource/Recomendation_collab_implementation.png "Implementation")
+
+## Recomendation Similar Item
+This model focusing for giving **similar item destination** after user click or open the detail destination.
+- On this model we just using Mathematics like **cosine similarity** for getting similar item between place_name & place_category
+- This model will be implemented on "Another options for you"
+
+    ![Implementation!](/resource/RecomendationSimilarItem_implementation.png "Implementation")
+
+## Recomendation Category
+This model focusing to give the best destination from user preferences such as { Category, City, and Price } and after that will give the 3 options {Gold, Silver, Bronze} with 5 destinations on every options.
+- First, our model will filtering category, city, price, and rating from the database, based on user preferences 
+- After that on this model we just using Mathematics like **cosine similarity** for getting similar item between price & rating
+- This model will be implemented on "Explore {Main Features}"
+
+    ![Implementation!](/resource/Recomendation_Category_implementation.png "Implementation")
+    ![Implementation!](/resource/Recomendation_Category_implementation2.png "Implementation")
