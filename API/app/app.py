@@ -10,23 +10,15 @@ from model.recomendation_category import recommend_places
 from model.recomendation_similarItem import rec_similarItem
 
 # Membuat koneksi ke database
-conn = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database='tourista_db' 
-)
-
-# Mengeksekusi query untuk mengambil data dari tabel
-
-query = "SELECT * FROM destination"
-destination = pd.read_sql_query(query, conn)
-
-query = "SELECT * FROM review_wisata"
-ratings = pd.read_sql_query(query, conn)
-
-query = "SELECT * FROM user_profile"
-users = pd.read_sql_query(query, conn)
+def connDB(host, user, password, database):
+    conn = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password,
+        database= database 
+    )
+    
+    return conn
 
 app = Flask(__name__)
 
@@ -50,6 +42,14 @@ def home():
 # menerima data menggunakan x-www-form-urlencoded
 @app.route("/recommendCollab", methods=["POST"])
 def recommendCollab():
+    conn = connDB('localhost', 'root', '', 'tourista_db')
+    
+    query = "SELECT * FROM destination"
+    destination = pd.read_sql_query(query, conn)
+    
+    query = "SELECT * FROM review_wisata"
+    ratings = pd.read_sql_query(query, conn)
+    
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request
         user_id =  request.form.get("user_id")
@@ -65,7 +65,7 @@ def recommendCollab():
         } 
     
         response = make_response(jsonify(data))
-    
+        conn.close()
         # Mengembalikan hasil rekomendasi sebagai respons JSON
         return response
     else:
@@ -73,12 +73,18 @@ def recommendCollab():
             'status': 'fail',
             'message': 'Content-Type harus application/x-www-form-urlencoded'
         }
+        conn.close()
         return jsonify(response), 400
 
 # Endpoint untuk route "/recommendContentBased"
 # menerima data menggunakan x-www-form-urlencoded
 @app.route("/recommendContentBased", methods=["POST"])
 def recommendContent():
+    conn = connDB('localhost', 'root', '', 'tourista_db')
+    
+    query = "SELECT * FROM destination"
+    destination = pd.read_sql_query(query, conn)
+    
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         # Mendapatkan data input dari body request  
         user_id = request.form.get('user_id')
@@ -101,7 +107,7 @@ def recommendContent():
         conn.commit()
         
         cursor.close()
-        
+        conn.close()
         data = {
             'status': 'success',
         } 
@@ -115,12 +121,18 @@ def recommendContent():
             'status': 'fail',
             'message': 'Content-Type harus application/x-www-form-urlencoded'
         }
+        conn.close()
         return jsonify(response), 400
 
 # Endpoint untuk route "/recommendSimilarItem"
 # menerima data menggunakan x-www-form-urlencoded
 @app.route("/recommendSimilarItem", methods=["POST"])
 def recommendSimilarItem():
+    conn = connDB('localhost', 'root', '', 'tourista_db')
+    
+    query = "SELECT * FROM destination"
+    destination = pd.read_sql_query(query, conn)
+    
     # Mendapatkan data input dari body request
     if request.headers['Content-Type'] == 'application/x-www-form-urlencoded':
         destination_name = str(request.form.get('destination_name'))
@@ -134,7 +146,7 @@ def recommendSimilarItem():
         } 
     
         response = make_response(jsonify(data))
-    
+        conn.close()
         # Mengembalikan hasil rekomendasi sebagai respons JSON
         return response
     else:
@@ -142,7 +154,7 @@ def recommendSimilarItem():
             'status': 'fail',
             'message': 'Content-Type harus application/x-www-form-urlencoded'
         }
-        
+        conn.close()
         return jsonify(response), 400
 
 # Error handler response
@@ -170,4 +182,4 @@ def methd_not_found(error):
     return response
 
 if __name__ == '__main__':
-    app.run(host=5001, debug=True)
+    app.run(debug=True)
