@@ -16,9 +16,9 @@ from model.recomendation_similarItem import rec_similarItem
 
 # Membuat koneksi ke database
 conn = mysql.connector.connect(
-    host='localhost',
+    host='34.101.200.187',
     user='root',
-    password='',
+    password='7b0d345c653dd8a54ccb286c10f575d1',
     database='tourista_db' 
 )
 
@@ -75,12 +75,6 @@ def recommendCollab(user_id: int = Form(...), user_lat: float = Form(...), user_
     # Mengembalikan hasil rekomendasi sebagai respons JSON
     return data
 
-
-class ContentBased(BaseModel):
-    user_id: int
-    category: str
-    city: str
-    price: int
 
 # Endpoint untuk route "/recommendContentBased"
 # menerima data menggunakan x-www-form-urlencoded
