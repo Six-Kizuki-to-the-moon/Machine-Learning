@@ -15,7 +15,7 @@ Note<br>
 <ul>
   <li>Make sure you already installed <a href="[https://translate.google.com/?sl=en&tl=id&text=packages&op=translate](https://www.anaconda.com/download-success)">anaconda</a></li>
   <li>Make sure you already installed <a href="https://www.apachefriends.org/">xampp</a></li>
-  <li>Download database on folder `/app/dataset/Db_touristaExample.sql` and import on your xampp</li>
+  <li>Download database on folder <a href="https://github.com/Six-Kizuki-to-the-moon/Machine-Learning/tree/main/dataset">`/app/dataset/Db_touristaExample.sql`</a> and import on database and use name 'tourista_db'</li>
 </ul>
 
 
