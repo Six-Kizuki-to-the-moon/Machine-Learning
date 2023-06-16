@@ -78,7 +78,6 @@ def recommendCollab():
 
 # Endpoint untuk route "/recommendContentBased"
 # menerima data menggunakan x-www-form-urlencoded
-<<<<<<< Updated upstream
 @app.route("/recommendContentBased", methods=["POST"])
 def recommendContent():
     conn = connDB('localhost', 'root', '', 'tourista_db')
@@ -92,26 +91,6 @@ def recommendContent():
         category = str(request.form.get('category'))
         city = str(request.form.get('city'))
         price = int(request.form.get('price'))
-=======
-@app.post("/recommendContentBased")
-def recommendContent(user_id: int = Form(...), category: str = Form(...), city: str = Form(...), price: int = Form(...)):
-    recommendations = recommend_places(city, category, price, 4)
-
-    cursor = conn.cursor()
-    
-    current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-    # syntax sql 
-    sql = "INSERT INTO trip_detail (user_id , trip_name_type, name_wisata, createdAt) VALUES (%s, %s, %s, %s)"
-    for category_name, places in recommendations.items():
-        for place_name in places:
-            values = (user_id, category_name, place_name, current_datetime)
-            cursor.execute(sql, values)
-            
-    conn.commit()
-    cursor.close()
->>>>>>> Stashed changes
-    
         # memanggil fungsi dari model yang sudah dibuat
         recommendations = recommend_places(destination, category, city, price, 4)
     
